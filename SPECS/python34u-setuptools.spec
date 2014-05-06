@@ -1,7 +1,7 @@
 %define srcname setuptools
 %define pymajor 3
-%define pyminor 3
-%define pyver %{pymajor}%{pyminor}
+%define pyminor 4
+%define pyver %{pymajor}%{pyminor}u
 %define pybasever %{pymajor}.%{pyminor}
 %define __python %{_bindir}/python%{pybasever}
 %define python_sitelib %(%{__python} -c "from distutils.sysconfig import get_python_lib; print(get_python_lib())")
@@ -67,6 +67,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Tue May 06 2014 Carl George <carl.george@rackspace.com> - 3.5.1-1.ius
+- Port from python33-setuptools
+
 * Mon May 05 2014 Carl George <carl.george@rackspace.com> - 3.5.1-1.ius
 - Latest upstream
 - BuildRoot redundant on el6
