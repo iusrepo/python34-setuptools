@@ -8,7 +8,7 @@
 %global srcname setuptools
 
 Name:           python%{iusver}-%{srcname}
-Version:        3.5.1
+Version:        3.6
 Release:        1.ius%{?dist}
 Summary:        Easily build and distribute Python %{pyver} packages
 Vendor:         IUS Community Project
@@ -68,7 +68,8 @@ rm -rf %{buildroot}
 
 
 %changelog
-
+* Thu May 08 2014 Carl George <carl.george@rackspace.com> - 3.6-1.ius
+- Latest upstream
 - Switch to global macros
 - Macro change: pyver to iusver
 - Macro change: pybasever to pyver
