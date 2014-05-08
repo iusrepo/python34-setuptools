@@ -1,15 +1,16 @@
-%define srcname setuptools
-%define pymajor 3
-%define pyminor 4
-%define pyver %{pymajor}%{pyminor}u
-%define pybasever %{pymajor}.%{pyminor}
-%define __python %{_bindir}/python%{pybasever}
-%define python_sitelib %(%{__python} -c "from distutils.sysconfig import get_python_lib; print(get_python_lib())")
+%global pymajor 3
+%global pyminor 4
+%global pyver %{pymajor}.%{pyminor}
+%global iusver %{pymajor}%{pyminor}u
+%global __python3 %{_bindir}/python%{pyver}
+%global python3_sitelib  %(%{__python3} -c "from distutils.sysconfig import get_python_lib; print(get_python_lib())")
+%global python3_sitearch %(%{__python3} -c "from distutils.sysconfig import get_python_lib; print(get_python_lib(1))")
+%global srcname setuptools
 
-Name:           python%{pyver}-%{srcname}
+Name:           python%{iusver}-%{srcname}
 Version:        3.5.1
 Release:        1.ius%{?dist}
-Summary:        Easily build and distribute Python %{pybasever} packages
+Summary:        Easily build and distribute Python %{pyver} packages
 Vendor:         IUS Community Project
 Group:          Applications/System
 License:        Python or ZPLv2.0
@@ -18,12 +19,12 @@ Source0:        http://pypi.python.org/packages/source/s/%{srcname}/%{srcname}-%
 Source1:        psfl.txt
 Source2:        zpl.txt
 BuildArch:      noarch
-BuildRequires:  python%{pyver}-devel
-Requires:       python%{pyver}
+BuildRequires:  python%{iusver}-devel
+Requires:       python%{iusver}
 # Keep the python-distribute name active for a few releases.  Eventually we'll
 # want to get rid of the Provides and just keep the Obsoletes
-Provides:       python%{pyver}-distribute = %{version}-%{release}
-Obsoletes:      python%{pyver}-distribute <= 0.6.49-2.ius%{?dist}
+Provides:       python%{iusver}-distribute = %{version}-%{release}
+Obsoletes:      python%{iusver}-distribute <= 0.6.49-2.ius%{?dist}
 
 
 %description
@@ -41,18 +42,18 @@ find -name '*.py' -type f -print0 | xargs -0 sed -i '1s|python|&%{pymajor}|'
 
 
 %build
-CFLAGS="$RPM_OPT_FLAGS" %{__python} setup.py build
+CFLAGS="$RPM_OPT_FLAGS" %{__python3} setup.py build
+
 
 %install
-rm -rf %{buildroot}
-%{__python} setup.py install --optimize 1 --skip-build --root %{buildroot}
-rm -rf %{buildroot}%{python_sitelib}/setuptools/tests
+%{__python3} setup.py install --optimize 1 --skip-build --root %{buildroot}
+rm -rf %{buildroot}%{python3_sitelib}/setuptools/tests
 rm -f %{buildroot}%{_bindir}/easy_install
 install -p -m 0644 %{SOURCE1} %{SOURCE2} .
 
 
 %check
-%{__python} setup.py test
+%{__python3} setup.py test
 
 
 %clean
@@ -62,11 +63,17 @@ rm -rf %{buildroot}
 %files
 %defattr(-,root,root,-)
 %doc *.txt docs
-%{python_sitelib}/*
-%{_bindir}/easy_install-%{pybasever}
+%{python3_sitelib}/*
+%{_bindir}/easy_install-%{pyver}
 
 
 %changelog
+
+- Switch to global macros
+- Macro change: pyver to iusver
+- Macro change: pybasever to pyver
+- Macro change: *python* to *python3*
+
 * Tue May 06 2014 Carl George <carl.george@rackspace.com> - 3.5.1-1.ius
 - Port from python33-setuptools
 
