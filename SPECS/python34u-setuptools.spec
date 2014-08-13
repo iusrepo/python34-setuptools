@@ -19,10 +19,6 @@ Source2:        zpl.txt
 BuildArch:      noarch
 BuildRequires:  python%{iusver}-devel
 Requires:       python%{iusver}
-# Keep the python-distribute name active for a few releases.  Eventually we'll
-# want to get rid of the Provides and just keep the Obsoletes
-Provides:       python%{iusver}-distribute = %{version}-%{release}
-Obsoletes:      python%{iusver}-distribute <= 0.6.49-2.ius%{?dist}
 
 
 %description
