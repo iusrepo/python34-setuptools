@@ -49,8 +49,7 @@ LC_CTYPE=en_US.utf8 %{__python3} setup.py test
 
 
 %files
-%defattr(-,root,root,-)
-%doc *.txt docs
+%doc psfl.txt zpl.txt docs
 %{python3_sitelib}/*
 %{_bindir}/easy_install-%{pyver}
 
