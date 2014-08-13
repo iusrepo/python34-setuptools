@@ -9,7 +9,6 @@ Name:           python%{iusver}-%{srcname}
 Version:        5.5.1
 Release:        1.ius%{?dist}
 Summary:        Easily build and distribute Python %{pyver} packages
-Vendor:         IUS Community Project
 Group:          Applications/System
 License:        Python or ZPLv2.0
 URL:            https://pypi.python.org/pypi/%{srcname}
