@@ -18,7 +18,6 @@ Source1:        psfl.txt
 Source2:        zpl.txt
 BuildArch:      noarch
 BuildRequires:  python%{iusver}-devel
-Requires:       python%{iusver}
 
 
 %description
