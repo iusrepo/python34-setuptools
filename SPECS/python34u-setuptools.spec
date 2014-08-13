@@ -2,8 +2,13 @@
 %global pyminor 4
 %global pyver %{pymajor}.%{pyminor}
 %global iusver %{pymajor}%{pyminor}u
+%global build_wheel 0
 %global srcname setuptools
 %global src %(echo %{srcname} | cut -c1)
+%if 0%{?build_wheel}
+%global python3_wheelname %{srcname}-%{version}-py2.py3-none-any.whl
+%global python3_record %{python3_sitelib}/%{srcname}-%{version}.dist-info/RECORD
+%endif
 
 Name:           python%{iusver}-%{srcname}
 Version:        5.5.1
@@ -17,6 +22,10 @@ Source1:        psfl.txt
 Source2:        zpl.txt
 BuildArch:      noarch
 BuildRequires:  python%{iusver}-devel
+%if 0%{?build_wheel}
+BuildRequires:  python%{iusver}-pip
+BuildRequires:  python%{iusver}-wheel
+%endif
 # For unittests
 BuildRequires: subversion
 
@@ -36,13 +45,28 @@ find -name '*.py' -type f -print0 | xargs -0 sed -i '1s|python|&%{pyver}|'
 
 
 %build
+%if 0%{?build_wheel}
+%{__python3} setup.py bdist_wheel
+%else
 CFLAGS="$RPM_OPT_FLAGS" %{__python3} setup.py build
+%endif
 
 
 %install
+%if 0%{?build_wheel}
+pip%{pyver} install --ignore-installed dist/%{python3_wheelname} --root %{buildroot} --strip-file-prefix %{buildroot}
+%else
 %{__python3} setup.py install --optimize 1 --skip-build --root %{buildroot}
+%endif
+# remove undeeded items
 %{__rm} -rf %{buildroot}%{python3_sitelib}/setuptools/tests
 %{__rm} -f %{buildroot}%{_bindir}/easy_install
+# clean up wheel record
+%if 0%{?build_wheel}
+sed -i '/^setuptools\/tests\//d' %{buildroot}%{python3_record}
+sed -i '/\/usr\/bin\/easy_install,/d' %{buildroot}%{python3_record}
+%endif
+# add licenses
 %{__install} -p -m 0644 %{SOURCE1} %{SOURCE2} .
 
 
