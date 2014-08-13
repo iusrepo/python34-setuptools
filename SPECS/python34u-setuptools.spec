@@ -21,8 +21,8 @@ BuildRequires:  python%{iusver}-devel
 
 
 %description
-Setuptools is a collection of enhancements to the Python distutils that allow
-you to more easily build and distribute Python packages, especially ones that
+Setuptools is a collection of enhancements to the Python %{pyver} distutils that allow
+you to more easily build and distribute Python %{pyver} packages, especially ones that
 have dependencies on other packages.
 
 This package also contains the runtime components of setuptools, necessary to
