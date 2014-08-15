@@ -11,8 +11,8 @@
 %endif
 
 Name:           python%{iusver}-%{srcname}
-Version:        5.5.1
-Release:        2.ius%{?dist}
+Version:        5.6
+Release:        1.ius%{?dist}
 Summary:        Easily build and distribute Python %{pyver} packages
 Group:          Applications/System
 License:        Python or ZPLv2.0
@@ -81,6 +81,9 @@ LC_CTYPE=en_US.utf8 %{__python3} setup.py test
 
 
 %changelog
+* Fri Aug 15 2014 Carl George <carl.george@rackspace.com> - 5.6-1.ius
+- Latest upstream
+
 * Wed Aug 13 2014 Carl George <carl.george@rackspace.com> - 5.5.1-2.ius
 - Remove obsolete/provides for python34u-distribute, since it never existed
 - Add wheel support
