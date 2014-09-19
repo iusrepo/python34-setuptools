@@ -11,7 +11,7 @@
 %endif
 
 Name:           python%{iusver}-%{srcname}
-Version:        5.7
+Version:        5.8
 Release:        1.ius%{?dist}
 Summary:        Easily build and distribute Python %{pyver} packages
 Group:          Applications/System
@@ -81,6 +81,9 @@ LC_CTYPE=en_US.utf8 %{__python3} setup.py test
 
 
 %changelog
+* Fri Sep 19 2014 Carl George <carl.george@rackspace.com> - 5.8-1.ius
+- Latest upstream
+
 * Fri Aug 15 2014 Carl George <carl.george@rackspace.com> - 5.7-1.ius
 - Latest upstream
 
