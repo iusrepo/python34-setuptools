@@ -11,7 +11,7 @@
 %endif
 
 Name:           python%{iusver}-%{srcname}
-Version:        11.1
+Version:        11.3.1
 Release:        1.ius%{?dist}
 Summary:        Easily build and distribute Python %{pyver} packages
 Group:          Applications/System
@@ -83,6 +83,9 @@ sed -i '/\/usr\/bin\/easy_install,/d' %{buildroot}%{python3_record}
 
 
 %changelog
+* Tue Jan 13 2015 Carl George <carl.george@rackspace.com> - 11.3.1-1.ius
+- Latest upstream
+
 * Mon Jan 05 2015 Carl George <carl.george@rackspace.com> - 11.1-1.ius
 - Latest upstream
 - Disable test suite
