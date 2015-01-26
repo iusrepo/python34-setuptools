@@ -9,6 +9,7 @@
 %global python3_wheelname %{srcname}-%{version}-py2.py3-none-any.whl
 %global python3_record %{python3_sitelib}/%{srcname}-%{version}.dist-info/RECORD
 %endif
+%global with_check 0
 
 Name:           python%{iusver}-%{srcname}
 Version:        11.3.1
@@ -26,8 +27,11 @@ BuildRequires:  python%{iusver}-devel
 BuildRequires:  python%{iusver}-pip
 BuildRequires:  python%{iusver}-wheel
 %endif
-# For unittests
-BuildRequires: subversion
+%if 0%{?with_check}
+# we don't have IUS versions of these yet
+BuildRequires:  python%{iusver}-pytest
+BuildRequires:  python%{iusver}-mock
+%endif
 
 
 %description
@@ -70,10 +74,12 @@ sed -i '/\/usr\/bin\/easy_install,/d' %{buildroot}%{python3_record}
 %{__install} -p -m 0644 %{SOURCE1} %{SOURCE2} .
 
 
-#%check
+%if 0%{?with_check}
+%check
 # Upstream has switched to 'setup.py ptr'.  We need to build
 # python%{iusver}-mock and python%{iusver}-pytest to enable this.
-#LC_CTYPE=en_US.utf8 %{__python3} setup.py ptr
+LC_CTYPE=en_US.utf8 %{__python3} setup.py ptr
+%endif
 
 
 %files
