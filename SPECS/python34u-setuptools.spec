@@ -92,6 +92,9 @@ LC_CTYPE=en_US.utf8 %{__python3} setup.py ptr
 * Mon Oct 12 2015 Ben Harper <ben.harper@rackspace.com> - 18.4-1.ius
 - Latest upstream
 
+* Wed Sep 23 2015 Carl George <carl.george@rackspace.com> - 18.3.2-1.ius
+- Latest upstream
+
 * Tue Sep 08 2015 Ben Harper <ben.harper@rackspace.com> - 18.3.1-1.ius
 - Latest upstream
 
