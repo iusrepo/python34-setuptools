@@ -57,9 +57,7 @@ rm -f %{buildroot}%{_bindir}/easy_install
 
 %if 0%{?with_check}
 %check
-# Upstream has switched to 'setup.py ptr'.  We need to build
-# python%{iusver}-mock and python%{iusver}-pytest to enable this.
-LC_CTYPE=en_US.utf8 %{__python3} setup.py ptr
+LANG=en_US.utf8 PYTHONPATH=$(pwd) py.test-%{python3_version}
 %endif
 
 
@@ -77,6 +75,7 @@ LC_CTYPE=en_US.utf8 %{__python3} setup.py ptr
 - Strip shebangs
 - Remove unneeded files
 - Include CHANGES.txt and README.txt in docs
+- Clean up %%check to match Fedora
 
 * Thu Feb 18 2016 Ben Harper <ben.harper@rackspace.com> - 19.7-1.ius
 - updating to 19.7
