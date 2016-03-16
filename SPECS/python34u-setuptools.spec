@@ -16,11 +16,9 @@ Version:        20.2.2
 Release:        1.ius%{?dist}
 Summary:        Easily build and distribute Python %{pyver} packages
 Group:          Applications/System
-License:        Python or ZPLv2.0
+License:        MIT
 URL:            https://pypi.python.org/pypi/%{srcname}
 Source0:        https://pypi.python.org/packages/source/%{src}/%{srcname}/%{srcname}-%{version}.tar.gz
-Source1:        psfl.txt
-Source2:        zpl.txt
 BuildArch:      noarch
 BuildRequires:  python%{iusver}-devel
 %if 0%{?build_wheel}
@@ -70,8 +68,6 @@ pip%{pyver} install --ignore-installed dist/%{python3_wheelname} --root %{buildr
 sed -i '/^setuptools\/tests\//d' %{buildroot}%{python3_record}
 sed -i '/\/usr\/bin\/easy_install,/d' %{buildroot}%{python3_record}
 %endif
-# add licenses
-%{__install} -p -m 0644 %{SOURCE1} %{SOURCE2} .
 
 
 %if 0%{?with_check}
@@ -83,7 +79,7 @@ LC_CTYPE=en_US.utf8 %{__python3} setup.py ptr
 
 
 %files
-%doc psfl.txt zpl.txt docs
+%doc docs/*
 %{python3_sitelib}/*
 %{_bindir}/easy_install-%{pyver}
 
@@ -91,6 +87,7 @@ LC_CTYPE=en_US.utf8 %{__python3} setup.py ptr
 %changelog
 * Wed Mar 16 2016 Carl George <carl.george@rackspace.com> - 20.2.2-2.ius
 - Latest upstream
+- License changed to MIT
 
 * Thu Feb 18 2016 Ben Harper <ben.harper@rackspace.com> - 19.7-1.ius
 - updating to 19.7
