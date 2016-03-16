@@ -64,7 +64,7 @@ LC_CTYPE=en_US.utf8 %{__python3} setup.py ptr
 
 
 %files
-%doc docs/*
+%doc docs/* CHANGES.txt README.txt
 %{python3_sitelib}/*
 %{_bindir}/easy_install-%{pyver}
 
@@ -76,6 +76,7 @@ LC_CTYPE=en_US.utf8 %{__python3} setup.py ptr
 - Remove wheel support
 - Strip shebangs
 - Remove unneeded files
+- Include CHANGES.txt and README.txt in docs
 
 * Thu Feb 18 2016 Ben Harper <ben.harper@rackspace.com> - 19.7-1.ius
 - updating to 19.7
