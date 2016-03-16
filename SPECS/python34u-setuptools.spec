@@ -34,7 +34,9 @@ execute the software that requires pkg_resources.py.
 
 %prep
 %setup -q -n %{srcname}-%{version}
-find -name '*.py' -type f -print0 | xargs -0 sed -i '1s|python|&%{pyver}|'
+
+# Strip shebangs
+find setuptools -name \*.py | xargs sed -i -e '1 {/^#!\//d}'
 
 
 %build
@@ -67,6 +69,7 @@ LC_CTYPE=en_US.utf8 %{__python3} setup.py ptr
 - Latest upstream
 - License changed to MIT
 - Remove wheel support
+- Strip shebangs
 
 * Thu Feb 18 2016 Ben Harper <ben.harper@rackspace.com> - 19.7-1.ius
 - updating to 19.7
