@@ -38,6 +38,9 @@ execute the software that requires pkg_resources.py.
 # Strip shebangs
 find setuptools -name \*.py | xargs sed -i -e '1 {/^#!\//d}'
 
+# Remove bundled exes
+rm -f setuptools/*.exe
+
 
 %build
 CFLAGS="$RPM_OPT_FLAGS" %{__python3} setup.py build
@@ -45,9 +48,11 @@ CFLAGS="$RPM_OPT_FLAGS" %{__python3} setup.py build
 
 %install
 %{__python3} setup.py install --optimize 1 --skip-build --root %{buildroot}
+
 # remove undeeded items
-%{__rm} -rf %{buildroot}%{python3_sitelib}/setuptools/tests
-%{__rm} -f %{buildroot}%{_bindir}/easy_install
+rm -rf %{buildroot}%{python3_sitelib}/setuptools/tests
+rm -rf docs/{Makefile,conf.py,_*}
+rm -f %{buildroot}%{_bindir}/easy_install
 
 
 %if 0%{?with_check}
@@ -70,6 +75,7 @@ LC_CTYPE=en_US.utf8 %{__python3} setup.py ptr
 - License changed to MIT
 - Remove wheel support
 - Strip shebangs
+- Remove unneeded files
 
 * Thu Feb 18 2016 Ben Harper <ben.harper@rackspace.com> - 19.7-1.ius
 - updating to 19.7
