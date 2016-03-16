@@ -1,31 +1,27 @@
-%global pymajor 3
-%global pyminor 4
-%global pyver %{pymajor}.%{pyminor}
-%global iusver %{pymajor}%{pyminor}u
+%global ius_suffix 34u
 %global srcname setuptools
-%global src %(echo %{srcname} | cut -c1)
 %global with_check 0
 
-Name:           python%{iusver}-%{srcname}
+Name:           python%{ius_suffix}-%{srcname}
 Version:        20.2.2
 Release:        1.ius%{?dist}
-Summary:        Easily build and distribute Python %{pyver} packages
+Summary:        Easily build and distribute Python packages
 Group:          Applications/System
 License:        MIT
 URL:            https://pypi.python.org/pypi/%{srcname}
-Source0:        https://pypi.python.org/packages/source/%{src}/%{srcname}/%{srcname}-%{version}.tar.gz
+Source0:        https://pypi.python.org/packages/source/s/%{srcname}/%{srcname}-%{version}.tar.gz
 BuildArch:      noarch
-BuildRequires:  python%{iusver}-devel
+BuildRequires:  python%{ius_suffix}-devel
 %if 0%{?with_check}
 # we don't have IUS versions of these yet
-BuildRequires:  python%{iusver}-pytest
-BuildRequires:  python%{iusver}-mock
+BuildRequires:  python%{ius_suffix}-pytest
+BuildRequires:  python%{ius_suffix}-mock
 %endif
 
 
 %description
-Setuptools is a collection of enhancements to the Python %{pyver} distutils that allow
-you to more easily build and distribute Python %{pyver} packages, especially ones that
+Setuptools is a collection of enhancements to the Python distutils that allow
+you to more easily build and distribute Python packages, especially ones that
 have dependencies on other packages.
 
 This package also contains the runtime components of setuptools, necessary to
@@ -64,7 +60,7 @@ LANG=en_US.utf8 PYTHONPATH=$(pwd) py.test-%{python3_version}
 %files
 %doc docs/* CHANGES.txt README.txt
 %{python3_sitelib}/*
-%{_bindir}/easy_install-%{pyver}
+%{_bindir}/easy_install-%{python3_version}
 
 
 %changelog
@@ -76,6 +72,7 @@ LANG=en_US.utf8 PYTHONPATH=$(pwd) py.test-%{python3_version}
 - Remove unneeded files
 - Include CHANGES.txt and README.txt in docs
 - Clean up %%check to match Fedora
+- Remove unneeded macros
 
 * Thu Feb 18 2016 Ben Harper <ben.harper@rackspace.com> - 19.7-1.ius
 - updating to 19.7
