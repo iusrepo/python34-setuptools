@@ -58,7 +58,7 @@ LANG=en_US.utf8 PYTHONPATH=$(pwd) py.test-%{python3_version}
 
 
 %files
-%doc docs/* CHANGES.txt README.txt
+%doc docs/*
 %{python3_sitelib}/*
 %{_bindir}/easy_install-%{python3_version}
 
@@ -68,6 +68,7 @@ LANG=en_US.utf8 PYTHONPATH=$(pwd) py.test-%{python3_version}
 - updating to 20.10.1
 - update Source0 url to pypi.io see
   https://bitbucket.org/pypa/pypi/issues/438/backwards-compatible-un-hashed-package
+- remove CHANGES.txt and README.txt in docs as they are no longer included
 
 * Wed Mar 16 2016 Carl George <carl.george@rackspace.com> - 20.2.2-2.ius
 - Latest upstream
