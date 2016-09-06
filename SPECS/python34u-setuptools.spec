@@ -3,7 +3,7 @@
 %global with_check 0
 
 Name:           python%{ius_suffix}-%{srcname}
-Version:        24.3.1
+Version:        25.4.0
 Release:        1.ius%{?dist}
 Summary:        Easily build and distribute Python packages
 Group:          Applications/System
@@ -64,6 +64,9 @@ LANG=en_US.utf8 PYTHONPATH=$(pwd) py.test-%{python3_version}
 
 
 %changelog
+* Tue Sep 06 2016 Carl George <carl.george@rackspace.com> - 25.4.0-1.ius
+- Latest upstream
+
 * Mon Aug 01 2016 Carl George <carl.george@rackspace.com> - 24.3.1-1.ius
 - Latest upstream
 
