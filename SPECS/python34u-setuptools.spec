@@ -3,7 +3,7 @@
 %global with_check 0
 
 Name:           python%{ius_suffix}-%{srcname}
-Version:        28.7.1
+Version:        30.2.0
 Release:        1.ius%{?dist}
 Summary:        Easily build and distribute Python packages
 Group:          Applications/System
@@ -64,6 +64,9 @@ LANG=en_US.utf8 PYTHONPATH=$(pwd) py.test-%{python3_version}
 
 
 %changelog
+* Mon Dec 05 2016 Ben Harper <ben.harper@rackspace.com> - 30.2.0-1.ius
+- Monthly release
+
 * Mon Nov 07 2016 Carl George <carl.george@rackspace.com> - 28.7.1-1.ius
 - Latest version
 
