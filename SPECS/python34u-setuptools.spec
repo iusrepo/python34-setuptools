@@ -3,13 +3,13 @@
 %global with_check 0
 
 Name:           python%{ius_suffix}-%{srcname}
-Version:        30.2.0
+Version:        33.1.1
 Release:        1.ius%{?dist}
 Summary:        Easily build and distribute Python packages
 Group:          Applications/System
 License:        MIT
 URL:            https://pypi.python.org/pypi/%{srcname}
-Source0:        https://files.pythonhosted.org/packages/source/s/%{srcname}/%{srcname}-%{version}.tar.gz
+Source0:        https://files.pythonhosted.org/packages/source/s/%{srcname}/%{srcname}-%{version}.zip
 BuildArch:      noarch
 BuildRequires:  python%{ius_suffix}-devel
 %if 0%{?with_check}
@@ -64,6 +64,9 @@ LANG=en_US.utf8 PYTHONPATH=$(pwd) py.test-%{python3_version}
 
 
 %changelog
+* Mon Mar 06 2017 Carl George <carl.george@rackspace.com> - 33.1.1-1.ius
+- Update to version 33
+
 * Mon Dec 05 2016 Ben Harper <ben.harper@rackspace.com> - 30.2.0-1.ius
 - Monthly release
 
