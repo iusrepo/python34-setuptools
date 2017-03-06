@@ -1,8 +1,8 @@
-%global ius_suffix 34u
+%global python python34u
 %global srcname setuptools
 %global with_check 0
 
-Name:           python%{ius_suffix}-%{srcname}
+Name:           %{python}-%{srcname}
 Version:        33.1.1
 Release:        1.ius%{?dist}
 Summary:        Easily build and distribute Python packages
@@ -11,11 +11,11 @@ License:        MIT
 URL:            https://pypi.python.org/pypi/%{srcname}
 Source0:        https://files.pythonhosted.org/packages/source/s/%{srcname}/%{srcname}-%{version}.zip
 BuildArch:      noarch
-BuildRequires:  python%{ius_suffix}-devel
+BuildRequires:  %{python}-devel
 %if 0%{?with_check}
 # we don't have IUS versions of these yet
-BuildRequires:  python%{ius_suffix}-pytest
-BuildRequires:  python%{ius_suffix}-mock
+BuildRequires:  %{python}-pytest
+BuildRequires:  %{python}-mock
 %endif
 
 
@@ -34,21 +34,17 @@ execute the software that requires pkg_resources.py.
 # Strip shebangs
 find setuptools -name \*.py | xargs sed -i -e '1 {/^#!\//d}'
 
-# Remove bundled exes
-rm -f setuptools/*.exe
-
 
 %build
-CFLAGS="$RPM_OPT_FLAGS" %{__python3} setup.py build
+%{__python3} setup.py build
 
 
 %install
 %{__python3} setup.py install --optimize 1 --skip-build --root %{buildroot}
 
 # remove undeeded items
-rm -rf %{buildroot}%{python3_sitelib}/setuptools/tests
-rm -rf docs/{Makefile,conf.py,_*}
-rm -f %{buildroot}%{_bindir}/easy_install
+rm -r docs/{Makefile,conf.py,_*}
+rm %{buildroot}%{_bindir}/easy_install
 
 
 %if 0%{?with_check}
