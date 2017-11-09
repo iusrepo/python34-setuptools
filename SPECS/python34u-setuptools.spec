@@ -3,7 +3,7 @@
 %global with_check 0
 
 Name:           %{python}-%{srcname}
-Version:        33.1.1
+Version:        36.6.0
 Release:        1.ius%{?dist}
 Summary:        Easily build and distribute Python packages
 Group:          Applications/System
@@ -33,7 +33,8 @@ execute the software that requires pkg_resources.py.
 
 # Strip shebangs
 find setuptools -name \*.py | xargs sed -i -e '1 {/^#!\//d}'
-
+# Remove bundled exes
+rm -f setuptools/*.exe
 
 %build
 %{__python3} setup.py build
@@ -61,6 +62,10 @@ LANG=en_US.utf8 PYTHONPATH=$(pwd) py.test-%{python3_version}
 
 
 %changelog
+* Thu Nov 09 2017 Ben Harper <ben.harper@rackspace.com> - 36.6.0-1.ius
+- Latest upstream
+- don't include exe files
+
 * Mon Mar 06 2017 Carl George <carl.george@rackspace.com> - 33.1.1-1.ius
 - Update to version 33
 - Install LICENSE file
