@@ -4,7 +4,7 @@
 
 Name:           %{python}-%{srcname}
 Version:        39.0.1
-Release:        1.ius%{?dist}
+Release:        1%{?dist}
 Summary:        Easily build and distribute Python packages
 License:        MIT
 URL:            https://pypi.python.org/pypi/%{srcname}
