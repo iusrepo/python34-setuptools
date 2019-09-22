@@ -7,11 +7,11 @@
 %endif
 
 Name:           %{python}-%{srcname}
-Version:        39.0.1
-Release:        2%{?dist}
+Version:        39.2.0
+Release:        4.1%{?dist}
 Summary:        Easily build and distribute Python packages
 License:        MIT
-URL:            https://pypi.python.org/pypi/%{srcname}
+URL:            https://github.com/pypa/setuptools
 Source0:        %pypi_source %{srcname} %{version} zip
 BuildArch:      noarch
 BuildRequires:  %{python}-devel
@@ -75,6 +75,9 @@ LANG=en_US.utf8 PYTHONPATH=$(pwd) py.test-%{python3_version}
 
 
 %changelog
+* Sun Sep 22 2019 Carl George <carl@george.computer> - 39.2.0-4.1
+- Update to 39.2.0 and bump release higher than EPEL
+
 * Sun Sep 22 2019 Carl George <carl@george.computer> - 39.0.1-2
 - Rename to python34-setuptools
 - Switch to EPEL python3 macros
