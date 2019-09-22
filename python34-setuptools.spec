@@ -1,10 +1,10 @@
-%global python python34u
+%global python python34
 %global srcname setuptools
 %global with_check 0
 
 Name:           %{python}-%{srcname}
 Version:        39.0.1
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Easily build and distribute Python packages
 License:        MIT
 URL:            https://pypi.python.org/pypi/%{srcname}
@@ -16,6 +16,10 @@ BuildRequires:  %{python}-devel
 BuildRequires:  %{python}-pytest
 BuildRequires:  %{python}-mock
 %endif
+
+# Rename from python34u-setuptools
+Provides: python34u-%{srcname} = %{version}-%{release}
+Obsoletes: python34u-%{srcname} < 39.0.1-2
 
 
 %description
@@ -65,6 +69,9 @@ LANG=en_US.utf8 PYTHONPATH=$(pwd) py.test-%{python3_version}
 
 
 %changelog
+* Sun Sep 22 2019 Carl George <carl@george.computer> - 39.0.1-2
+- Rename to python34-setuptools
+
 * Tue Mar 27 2018 Carl George <carl@george.computer> - 39.0.1-1.ius
 - Latest upstream
 - Include CHANGES.rst and README.rst
