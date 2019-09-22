@@ -2,15 +2,20 @@
 %global srcname setuptools
 %global with_check 0
 
+%if %{undefined el6}
+%global __python3 /usr/bin/python3.4
+%endif
+
 Name:           %{python}-%{srcname}
 Version:        39.0.1
 Release:        2%{?dist}
 Summary:        Easily build and distribute Python packages
 License:        MIT
 URL:            https://pypi.python.org/pypi/%{srcname}
-Source0:        https://files.pythonhosted.org/packages/source/s/%{srcname}/%{srcname}-%{version}.zip
+Source0:        %pypi_source %{srcname} %{version} zip
 BuildArch:      noarch
 BuildRequires:  %{python}-devel
+BuildRequires:  python3-rpm-macros
 %if 0%{?with_check}
 # we don't have IUS versions of these yet
 BuildRequires:  %{python}-pytest
@@ -39,12 +44,13 @@ find setuptools -name \*.py | xargs sed -i -e '1 {/^#!\//d}'
 # Remove bundled exes
 rm -f setuptools/*.exe
 
+
 %build
-%{__python3} setup.py build
+%py3_build
 
 
 %install
-%{__python3} setup.py install --optimize 1 --skip-build --root %{buildroot}
+%py3_install
 
 # remove undeeded items
 rm -r docs/{Makefile,conf.py,_*}
@@ -61,16 +67,17 @@ LANG=en_US.utf8 PYTHONPATH=$(pwd) py.test-%{python3_version}
 %license LICENSE
 %doc docs/* CHANGES.rst README.rst
 %{python3_sitelib}/easy_install.py
-%{python3_sitelib}/__pycache__/easy_install.cpython-34.py*
+%{python3_sitelib}/__pycache__/easy_install.cpython-%{python3_version_nodots}.py*
 %{python3_sitelib}/pkg_resources/
 %{python3_sitelib}/setuptools/
-%{python3_sitelib}/setuptools-%{version}-py3.4.egg-info
+%{python3_sitelib}/setuptools-%{version}-py%{python3_version}.egg-info
 %{_bindir}/easy_install-%{python3_version}
 
 
 %changelog
 * Sun Sep 22 2019 Carl George <carl@george.computer> - 39.0.1-2
 - Rename to python34-setuptools
+- Switch to EPEL python3 macros
 
 * Tue Mar 27 2018 Carl George <carl@george.computer> - 39.0.1-1.ius
 - Latest upstream
